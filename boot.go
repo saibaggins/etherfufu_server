@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/saibaggins/etherfufu-server/controllers"
+	"github.com/saibaggins/etherfufu-server/utils"
 	"net/http"
 )
 
@@ -26,7 +27,14 @@ func CORSMiddleware() gin.HandlerFunc {
 }
 
 func main() {
+	utils.StartDBSession("mongodb://localhost:27017/test")
+	session := utils.GetDB()
+	defer session.Close()
+
+	fmt.Println(session.DB("test").C("sessions").Count())
+
 	r := gin.Default()
+
 	r.Use(CORSMiddleware())
 
 	v1 := r.Group("/v1")
