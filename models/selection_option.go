@@ -3,7 +3,7 @@ package models
 type SelectionOption struct {
 	Attribute string   `json:"attribute"`
 	Values    []string `json:"values"`
-	Metric    string   `json:"metric"`
+	Metric    string   `json:"metric,omitempty"`
 }
 
 type SelectionOptionModel struct{}
