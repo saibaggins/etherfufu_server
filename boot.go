@@ -33,7 +33,7 @@ func main() {
 	{
 		/*** START USER ***/
 		v1.GET("/ping", new(controllers.HomeController).Ping)
-		v1.GET("/audiobank/selections", new(controllers.AudioBankController).ListAll)
+		v1.GET("/audiobank/options", new(controllers.AudioBankController).ListAll)
 	}
 
 	r.NoRoute(func(c *gin.Context) {
@@ -42,5 +42,6 @@ func main() {
 			"message": "Path is unavailable",
 		})
 	})
+
 	r.Run(":3000")
 }
