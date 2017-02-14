@@ -9,24 +9,31 @@ import (
 )
 
 func main() {
-	utils.StartDBSession("mongodb://localhost:27017/test")
-	session := utils.GetDB()
-	defer session.Close()
+	// Initialize the configuration
+	config := utils.LoadEnvConfig()
+	fmt.Println(config)
 
-	result, _ := session.DB("test").C("sessions").Count()
-	fmt.Println(result)
+	// Initialize the database
+	//////////////////////////////////////////////////////
+	// utils.StartDBSession(config.Database.URI)	    //
+	// session := utils.GetDB()			    //
+	// defer session.Close()			    //
+	//////////////////////////////////////////////////////
 
+	// Define the router
 	r := gin.Default()
 
+	// Load Middlewares
 	r.Use(CORSMiddleware())
 
+	// Define the routes
 	v1 := r.Group("/v1")
 	{
-		/*** START USER ***/
 		v1.GET("/ping", new(controllers.HomeController).Ping)
 		v1.GET("/audiobank/options", new(controllers.AudioBankController).ListAll)
 	}
 
+	// Handle No routes
 	r.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"code":    http.StatusNotFound,
@@ -34,5 +41,6 @@ func main() {
 		})
 	})
 
+	// Initialize the server
 	r.Run(":3000")
 }

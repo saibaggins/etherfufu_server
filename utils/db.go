@@ -4,11 +4,6 @@ import (
 	"gopkg.in/mgo.v2"
 )
 
-type DBConfig struct {
-	URL  string `default:"mongo://localhost:3600/test"`
-	Port uint   `default:"3306"`
-}
-
 var db *mgo.Session
 
 // return a DB session ...
