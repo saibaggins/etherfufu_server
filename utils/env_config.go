@@ -39,13 +39,12 @@ func LoadEnvConfig() *Configuration {
 		log.Fatal("Config Parse Error: ", err)
 	}
 
-	_configuration = &config
-	return _configuration
+	return &config
 }
 
 func GetEnvConfig() *Configuration {
 	if _configuration == nil {
-		return LoadEnvConfig()
+		_configuration = LoadEnvConfig()
 	}
 
 	return _configuration

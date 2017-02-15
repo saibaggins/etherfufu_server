@@ -12,8 +12,8 @@ type AudioBankController struct {
 }
 
 func (ctrl *AudioBankController) ListAll(c *gin.Context) {
-	selectionOptionModel := models.SelectionOptionModel{}
-	c.JSON(http.StatusOK, selectionOptionModel.FindAll())
+	displayOptionModel := models.DisplayOptionModel{}
+	c.JSON(http.StatusOK, displayOptionModel.FindAll())
 }
 
 func (self *AudioBankController) CreateMetadata(c *gin.Context) {
