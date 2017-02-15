@@ -19,15 +19,16 @@ type Configuration struct {
 
 var _configuration *Configuration
 
-func GetConfigPath() string {
-	activeEnv := os.Getenv("ACTIVE_ENV")
-	fmt.Println("Current active environment is ", activeEnv)
-	absPath, _ := filepath.Abs("./config")
-	return filepath.Join(absPath, activeEnv+".yml")
-}
-
 func LoadEnvConfig() *Configuration {
-	file, err := ioutil.ReadFile(GetConfigPath())
+
+	getConfigPath := func() string {
+		activeEnv := os.Getenv("ACTIVE_ENV")
+		fmt.Println("Current active environment is ", activeEnv)
+		absPath, _ := filepath.Abs("./config")
+		return filepath.Join(absPath, activeEnv+".yml")
+	}
+
+	file, err := ioutil.ReadFile(getConfigPath())
 	if err != nil {
 		log.Fatal("Config File Missing. ", err)
 	}
@@ -43,5 +44,9 @@ func LoadEnvConfig() *Configuration {
 }
 
 func GetEnvConfig() *Configuration {
+	if _configuration == nil {
+		return LoadEnvConfig()
+	}
+
 	return _configuration
 }

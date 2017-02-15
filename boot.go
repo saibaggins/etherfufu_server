@@ -6,11 +6,12 @@ import (
 	"github.com/saibaggins/etherfufu-server/controllers"
 	"github.com/saibaggins/etherfufu-server/utils"
 	"net/http"
+	"github.com/saibaggins/etherfufu-server/core"
 )
 
 func main() {
 	// Initialize the configuration
-	config := utils.LoadEnvConfig()
+	config := utils.GetEnvConfig()
 	fmt.Println(config)
 
 	// Initialize the database
@@ -24,13 +25,16 @@ func main() {
 	r := gin.Default()
 
 	// Load Middlewares
-	r.Use(CORSMiddleware())
+	r.Use(core.CORSMiddleware())
 
 	// Define the routes
 	v1 := r.Group("/v1")
 	{
-		v1.GET("/ping", new(controllers.HomeController).Ping)
-		v1.GET("/audiobank/options", new(controllers.AudioBankController).ListAll)
+		audiobank_controller := new(controllers.AudioBankController)
+
+		v1.GET("/audiobank/options", audiobank_controller.ListAll)
+		v1.POST("/audiobank/metadata", audiobank_controller.CreateMetadata)
+
 	}
 
 	// Handle No routes
