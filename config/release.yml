@@ -1,4 +1,5 @@
 database:
   uri: "mongod://localhost:27017/test"
 aws:
-  key: "something"
+  access_key: ***REMOVED***
+  api_secret_key: ***REMOVED***

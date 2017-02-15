@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/saibaggins/etherfufu-server/controllers"
+	"github.com/saibaggins/etherfufu-server/core"
 	"github.com/saibaggins/etherfufu-server/utils"
 	"net/http"
-	"github.com/saibaggins/etherfufu-server/core"
 )
 
 func main() {

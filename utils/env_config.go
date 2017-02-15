@@ -9,22 +9,31 @@ import (
 	"path/filepath"
 )
 
-type DBConfig struct {
-	URI string `yaml:"uri"`
-}
-
 type Configuration struct {
-	Database DBConfig `yaml:"database"`
+	Database struct {
+		URI string `yaml:"uri"`
+	} `yaml:"database"`
+	AWS struct {
+		AccessKey    string `yaml:"access_key"`
+		APISecretKey string `yaml:"api_secret_key"`
+	} `yaml:"aws"`
 }
 
 var _configuration *Configuration
 
 func LoadEnvConfig() *Configuration {
 
+	getBaseConfigPath := func() string {
+		if defaultConfigPath := os.Getenv("CONFIG_PATH"); len(defaultConfigPath) > 0 {
+			return defaultConfigPath
+		}
+		return "./config"
+	}
+
 	getConfigPath := func() string {
 		activeEnv := os.Getenv("ACTIVE_ENV")
 		fmt.Println("Current active environment is ", activeEnv)
-		absPath, _ := filepath.Abs("./config")
+		absPath, _ := filepath.Abs(getBaseConfigPath())
 		return filepath.Join(absPath, activeEnv+".yml")
 	}
 
