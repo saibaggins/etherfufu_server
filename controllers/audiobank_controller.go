@@ -22,6 +22,6 @@ func (self *AudioBankController) CreateMetadata(c *gin.Context) {
 		metadata.ID = uuid.NewV1()
 		c.JSON(http.StatusOK, metadata)
 	} else {
-		c.JSON(http.StatusBadRequest, gin.H{"status" : "bad request"})
+		c.AbortWithStatus(http.StatusBadRequest)
 	}
 }
