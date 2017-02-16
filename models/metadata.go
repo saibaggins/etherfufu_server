@@ -1,11 +1,12 @@
 package models
 
 import (
+	"github.com/saibaggins/etherfufu-server/core"
 	"github.com/saibaggins/etherfufu-server/utils"
 )
 
 var (
-	MetadataModelTableName = utils.ActiveENV() + "_" + "etherfufu_audio_sample_metadata"
+	MetadataModelTableName = core.ActiveENV() + "_" + "etherfufu_audio_sample_metadata"
 )
 
 type Metadata struct {

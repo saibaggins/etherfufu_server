@@ -2,6 +2,7 @@ package models
 
 import (
 	"github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+	"github.com/saibaggins/etherfufu-server/core"
 	"github.com/saibaggins/etherfufu-server/utils"
 )
 
@@ -15,7 +16,7 @@ type DisplayOption struct {
 }
 
 var (
-	DisplayOptionModelTableName = utils.ActiveENV() + "_" + "etherfufu_display_options"
+	DisplayOptionModelTableName = core.ActiveENV() + "_" + "etherfufu_display_options"
 )
 
 type DisplayOptionModel struct{}
