@@ -7,16 +7,9 @@ import (
 	"net/http"
 )
 
-// Default home controller
-type AudioBankController struct {
-}
+type MetadataController struct{}
 
-func (ctrl *AudioBankController) ListAll(c *gin.Context) {
-	displayOptionModel := models.DisplayOptionModel{}
-	c.JSON(http.StatusOK, displayOptionModel.FindAll())
-}
-
-func (self *AudioBankController) CreateMetadata(c *gin.Context) {
+func (self *MetadataController) Create(c *gin.Context) {
 	var metadata models.Metadata
 	if c.BindJSON(&metadata) == nil {
 		metadata.ID = uuid.NewV1().String()

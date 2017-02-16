@@ -1,18 +1,13 @@
 package main
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/saibaggins/etherfufu-server/controllers"
 	"github.com/saibaggins/etherfufu-server/core"
-	"github.com/saibaggins/etherfufu-server/utils"
 	"net/http"
 )
 
 func main() {
-	// Initialize the configuration
-	config := utils.GetEnvConfig()
-
 	// Define the router
 	r := gin.Default()
 
@@ -20,12 +15,14 @@ func main() {
 	r.Use(core.CORSMiddleware())
 
 	// Define the routes
-	v1 := r.Group("/v1")
+	v1 := r.Group("/audiobank/v1")
 	{
-		audiobank_controller := new(controllers.AudioBankController)
+		audiobank_controller := new(controllers.DisplayOptionController)
+		metadata_controller := new(controllers.MetadataController)
 
-		v1.GET("/audiobank/options", audiobank_controller.ListAll)
-		v1.POST("/audiobank/metadata", audiobank_controller.CreateMetadata)
+		v1.GET("options", audiobank_controller.ListAll)
+		v1.PUT("options", audiobank_controller.Create)
+		v1.POST("metadata", metadata_controller.Create)
 
 	}
 

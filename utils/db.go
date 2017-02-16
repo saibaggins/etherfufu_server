@@ -35,3 +35,12 @@ func (model DBModel) PutRecord(data interface{}) bool {
 
 	return true
 }
+
+func (model DBModel) ListRecords() *dynamodb.ScanOutput {
+	params := &dynamodb.ScanInput{TableName: aws.String(model.TableName)}
+	resp, err := model.DBSession.Scan(params)
+	if err != nil {
+		log.Fatal("Failed to reterive results", err)
+	}
+	return resp
+}
