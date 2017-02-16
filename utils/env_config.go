@@ -31,10 +31,9 @@ func LoadEnvConfig() *Configuration {
 	}
 
 	getConfigPath := func() string {
-		activeEnv := os.Getenv("ACTIVE_ENV")
-		fmt.Println("Current active environment is ", activeEnv)
+		fmt.Println("Current active environment is ", ActiveENV())
 		absPath, _ := filepath.Abs(getBaseConfigPath())
-		return filepath.Join(absPath, activeEnv+".yml")
+		return filepath.Join(absPath, ActiveENV()+".yml")
 	}
 
 	file, err := ioutil.ReadFile(getConfigPath())
@@ -49,6 +48,10 @@ func LoadEnvConfig() *Configuration {
 	}
 
 	return &config
+}
+
+func ActiveENV() string {
+	return os.Getenv("ACTIVE_ENV")
 }
 
 func GetEnvConfig() *Configuration {

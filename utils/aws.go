@@ -14,9 +14,9 @@ func GetAWSSession() *session.Session {
 		log.Fatal("Error in creating session")
 	}
 
-	return &sess
+	return sess
 }
 
-func DynamoSession() {
-	dynamodb.New(GetAWSSession())
+func DynamoSession() *dynamodb.DynamoDB {
+	return dynamodb.New(GetAWSSession())
 }
