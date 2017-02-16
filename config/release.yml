@@ -1,5 +1,0 @@
-database:
-  uri: "mongod://localhost:27017/test"
-aws:
-  access_key: ***REMOVED***
-  api_secret_key: ***REMOVED***
