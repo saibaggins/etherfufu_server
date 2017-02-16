@@ -12,14 +12,6 @@ import (
 func main() {
 	// Initialize the configuration
 	config := utils.GetEnvConfig()
-	fmt.Println(config)
-
-	// Initialize the database
-	//////////////////////////////////////////////////////
-	// utils.StartDBSession(config.Database.URI)	    //
-	// session := utils.GetDB()			    //
-	// defer session.Close()			    //
-	//////////////////////////////////////////////////////
 
 	// Define the router
 	r := gin.Default()

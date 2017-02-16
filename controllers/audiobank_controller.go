@@ -3,8 +3,8 @@ package controllers
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/saibaggins/etherfufu-server/models"
-	"net/http"
 	"github.com/satori/go.uuid"
+	"net/http"
 )
 
 // Default home controller
@@ -19,8 +19,13 @@ func (ctrl *AudioBankController) ListAll(c *gin.Context) {
 func (self *AudioBankController) CreateMetadata(c *gin.Context) {
 	var metadata models.Metadata
 	if c.BindJSON(&metadata) == nil {
-		metadata.ID = uuid.NewV1()
-		c.JSON(http.StatusOK, metadata)
+		metadata.ID = uuid.NewV1().String()
+		success := new(models.MetadataModel).Put(metadata)
+		if success {
+			c.JSON(http.StatusOK, metadata)
+		} else {
+			c.AbortWithStatus(http.StatusConflict)
+		}
 	} else {
 		c.AbortWithStatus(http.StatusBadRequest)
 	}
