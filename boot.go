@@ -41,5 +41,3 @@ func main() {
 	// Initialize the server
 	r.Run(":3000")
 }
-
-func InitializeRoutes()
