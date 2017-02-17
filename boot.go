@@ -8,6 +8,10 @@ import (
 )
 
 func main() {
+	if core.ActiveENV() != "development" {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	// Define the router
 	r := gin.Default()
 
@@ -37,3 +41,5 @@ func main() {
 	// Initialize the server
 	r.Run(":3000")
 }
+
+func InitializeRoutes()
