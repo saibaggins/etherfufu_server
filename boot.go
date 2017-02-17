@@ -13,13 +13,13 @@ func main() {
 	}
 
 	// Define the router
-	r := gin.Default()
+	router := gin.Default()
 
 	// Load Middlewares
-	r.Use(core.CORSMiddleware())
+	router.Use(core.CORSMiddleware())
 
 	// Define the routes
-	v1 := r.Group("/audiobank/v1")
+	v1 := router.Group("/audiobank/v1")
 	{
 		audiobank_controller := new(controllers.DisplayOptionController)
 		metadata_controller := new(controllers.MetadataController)
@@ -31,7 +31,7 @@ func main() {
 	}
 
 	// Handle No routes
-	r.NoRoute(func(c *gin.Context) {
+	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{
 			"code":    http.StatusNotFound,
 			"message": "Path is unavailable",
@@ -39,5 +39,5 @@ func main() {
 	})
 
 	// Initialize the server
-	r.Run(":3000")
+	http.ListenAndServe(":3000", router)
 }
