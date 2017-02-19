@@ -9,28 +9,28 @@ import (
 )
 
 const (
-	Development = "development"
+	Production = "production"
 )
 
 func main() {
 
-	if core.ActiveENV() != Development {
-		gin.SetMode(gin.ReleaseMode)
-	}
+	setAppVerbosity()
 
-	// Define the router
 	router := gin.New()
-
-	// Load Middlewares
 	loadMiddlewares(router)
-
-	// Define the routes
 	defineRoutes(router)
 
 	// Initialize the server
 	http.ListenAndServe(":3000", router)
 }
 
+func setAppVerbosity() {
+	if core.ActiveENV() == Production {
+		gin.SetMode(gin.ReleaseMode)
+	}
+}
+
+// Load Middlewares
 func loadMiddlewares(router *gin.Engine) {
 	router.Use(gin.Logger())
 	router.Use(gin.Recovery())
@@ -38,6 +38,7 @@ func loadMiddlewares(router *gin.Engine) {
 	router.Use(gin.ErrorLogger())
 }
 
+// Define the routes
 func defineRoutes(router *gin.Engine) {
 	v1 := router.Group("/audiobank/v1")
 	{
@@ -51,7 +52,6 @@ func defineRoutes(router *gin.Engine) {
 
 	}
 
-	// Handle No routes
 	router.NoRoute(func(c *gin.Context) {
 		statusCode := http.StatusNotFound
 		c.JSON(http.StatusNotFound, gin.H{
