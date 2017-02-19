@@ -1,8 +1,8 @@
-hash: 21d3c25792b7c6b90e771d1ceaf42ff5e92223cee6a1b55658575290c6b4c300
-updated: 2017-02-17T16:44:52.032144027+05:30
+hash: 194c0e895a290bd9282a4503ac7916b5d77e27d93075ee82d1d899498d8b9952
+updated: 2017-02-19T23:36:02.653084839+05:30
 imports:
 - name: github.com/aws/aws-sdk-go
-  version: f844700ba2a387dfee7ab3679e7544b5dbd6d394
+  version: b2852089fcfd0794d25d57f193e15121ab8a6d9e
   subpackages:
   - aws
   - aws/awserr
@@ -31,8 +31,6 @@ imports:
   - service/dynamodb
   - service/dynamodb/dynamodbattribute
   - service/sts
-- name: github.com/fvbock/endless
-  version: 447134032cb6a86814f570257390a379982dfc61
 - name: github.com/gin-gonic/gin
   version: e2212d40c62a98b388a5eb48ecbdcf88534688ba
   subpackages:
