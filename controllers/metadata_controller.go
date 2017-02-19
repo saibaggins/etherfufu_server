@@ -23,3 +23,9 @@ func (self *MetadataController) Create(c *gin.Context) {
 		c.AbortWithStatus(http.StatusBadRequest)
 	}
 }
+
+func (self *MetadataController) UploadAudioSample(c *gin.Context) {
+	//metadata_id := c.Param("metadata_id")
+	//file, header, err := c.Request.FormFile("upload")
+
+}

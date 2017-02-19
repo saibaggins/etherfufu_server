@@ -13,6 +13,7 @@ type Configuration struct {
 	Database struct {
 		URI string `yaml:"uri"`
 	} `yaml:"database"`
+
 	AWS struct {
 		AccessKey    string `yaml:"access_key"`
 		APISecretKey string `yaml:"api_secret_key"`
@@ -21,7 +22,19 @@ type Configuration struct {
 
 var _configuration *Configuration
 
-func LoadEnvConfig() *Configuration {
+func ActiveENV() string {
+	return os.Getenv("ACTIVE_ENV")
+}
+
+func EnvConfig() *Configuration {
+	if _configuration == nil {
+		_configuration = loadEnvConfig()
+	}
+
+	return _configuration
+}
+
+func loadEnvConfig() *Configuration {
 
 	getBaseConfigPath := func() string {
 		if defaultConfigPath := os.Getenv("CONFIG_PATH"); len(defaultConfigPath) > 0 {
@@ -48,16 +61,4 @@ func LoadEnvConfig() *Configuration {
 	}
 
 	return &config
-}
-
-func ActiveENV() string {
-	return os.Getenv("ACTIVE_ENV")
-}
-
-func GetEnvConfig() *Configuration {
-	if _configuration == nil {
-		_configuration = LoadEnvConfig()
-	}
-
-	return _configuration
 }

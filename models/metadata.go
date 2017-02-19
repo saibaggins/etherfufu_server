@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	MetadataModelTableName = core.ActiveENV() + "_" + "etherfufu_audio_sample_metadata"
+	metadataModelTableName = core.ActiveENV() + "_" + "etherfufu_audio_sample_metadata"
 )
 
 type Metadata struct {
@@ -23,6 +23,6 @@ type Metadata struct {
 type MetadataModel struct{}
 
 func (self *MetadataModel) Put(data Metadata) bool {
-	model := utils.NewDBModel(MetadataModelTableName)
+	model := utils.NewDBModel(metadataModelTableName)
 	return model.PutRecord(data)
 }

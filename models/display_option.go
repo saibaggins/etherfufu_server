@@ -21,7 +21,7 @@ var (
 
 type DisplayOptionModel struct{}
 
-func (sel *DisplayOptionModel) FindAll() []DisplayOption {
+func (self *DisplayOptionModel) FindAll() []DisplayOption {
 	var display_options []DisplayOption
 	table := utils.NewDBModel(DisplayOptionModelTableName)
 	result := table.ListRecords()
