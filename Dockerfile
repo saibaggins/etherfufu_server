@@ -1,4 +1,4 @@
-FROM golang:1.7
+FROM golang:1.8
 
 RUN curl -s https://glide.sh/get | sh
 RUN apt-get update && apt-get install netcat -y
