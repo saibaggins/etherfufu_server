@@ -4,6 +4,7 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/dynamodb"
+	"github.com/aws/aws-sdk-go/service/s3"
 	"log"
 )
 
@@ -22,4 +23,8 @@ func GetAWSSession() *session.Session {
 
 func DynamoSession() *dynamodb.DynamoDB {
 	return dynamodb.New(GetAWSSession())
+}
+
+func S3Service() *s3.S3 {
+	return s3.New(GetAWSSession())
 }
