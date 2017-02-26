@@ -5,13 +5,14 @@ import (
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/gin-gonic/gin"
+	"github.com/saibaggins/etherfufu-server/core"
 	"github.com/saibaggins/etherfufu-server/models"
 	"github.com/saibaggins/etherfufu-server/utils"
 	"github.com/satori/go.uuid"
 	"net/http"
 )
 
-const AudioSampleBucketName = "com.saibaggins.etherfufu"
+var AudioSampleBucketName = "com.saibaggins.etherfufu." + core.ActiveENV()
 
 type MetadataController struct{}
 
