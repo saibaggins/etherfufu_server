@@ -12,6 +12,11 @@ const (
 	Production = "production"
 )
 
+type ErrorResponse struct {
+	Code    string `json:"code"`
+	Message string `json:"message"`
+}
+
 func main() {
 
 	setAppVerbosity()
@@ -54,9 +59,9 @@ func defineRoutes(router *gin.Engine) {
 
 	router.NoRoute(func(c *gin.Context) {
 		statusCode := http.StatusNotFound
-		c.JSON(http.StatusNotFound, gin.H{
-			"code":    statusCode,
-			"message": http.StatusText(statusCode),
+		c.JSON(http.StatusNotFound, ErrorResponse{
+			Code:    "NOT_FOUND",
+			Message: http.StatusText(statusCode),
 		})
 	})
 }
