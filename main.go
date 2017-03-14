@@ -45,15 +45,21 @@ func loadMiddlewares(router *gin.Engine) {
 
 // Define the routes
 func defineRoutes(router *gin.Engine) {
-	v1 := router.Group("/audiobank/v1")
+	v1 := router.Group("/v1")
 	{
-		audiobank_controller := new(controllers.DisplayOptionController)
-		metadata_controller := new(controllers.MetadataController)
+		audiobank := v1.Group("/audiobank")
+		{
+			audiobank_controller := new(controllers.DisplayOptionController)
+			audiobank.GET("options", audiobank_controller.ListAll)
+			audiobank.PUT("options", audiobank_controller.Create)
 
-		v1.GET("options", audiobank_controller.ListAll)
-		v1.PUT("options", audiobank_controller.Create)
-		v1.POST("metadata", metadata_controller.Create)
-		v1.POST("metadata/:metadata_id/sample", metadata_controller.UploadAudioSample)
+			metadata_controller := new(controllers.MetadataController)
+			audiobank.POST("metadata", metadata_controller.Create)
+			audiobank.POST("metadata/:metadata_id/sample", metadata_controller.UploadAudioSample)
+		}
+
+		home_controller := new(controllers.HomeController)
+		v1.Any("call", home_controller.Call)
 
 	}
 
